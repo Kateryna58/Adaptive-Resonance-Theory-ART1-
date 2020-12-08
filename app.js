@@ -1,0 +1,12 @@
+const D=7;
+const RHO=0.4;
+const BETA=0.9;
+let vector_1=new FeatureVector([1,0,1,0,1,1,0]);
+let vector_2=new FeatureVector([1,0,0,1,0,1,1]);
+let vector_3=new FeatureVector([1,0,1,0,1,0,0]);
+let vector_4=new FeatureVector([1,0,1,0,0,0,1]);
+let vector_5=new FeatureVector([0,1,0,0,1,0,0]);
+let vector_6=new FeatureVector([0,0,1,0,0,1,0]);
+let vector_7=new FeatureVector([0,0,1,0,0,0,1]);
+let vector_8=new FeatureVector([0,1,0,0,1,0,1]);
+let vector_9=new FeatureVector([1,1,1,0,0,1,0]);
