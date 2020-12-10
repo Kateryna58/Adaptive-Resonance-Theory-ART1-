@@ -48,56 +48,113 @@ function generateRandomArray() {
     }
   }
   let futureVector = new Array();
-  function andVector(a,b) {
+  function andVector(a, b) {
     // for (let i = 0; i < 1; i++) {
     //   x = P[i];
-    futureVector=[];
-      for (let j = 0; j < D; j++) {
-        // futureVector.push(x[j]+E[j]);
-        if(a[j]+b[j]>1){
-          futureVector.push(1);
-        }else{
-          futureVector.push(0);
-        }
+    futureVector = [];
+    for (let j = 0; j < D; j++) {
+      // futureVector.push(x[j]+E[j]);
+      if (a[j] + b[j] > 1) {
+        futureVector.push(1);
+      } else {
+        futureVector.push(0);
+      }
       // }
     }
     return futureVector;
   }
   let futureVectorSumm;
   function summVector(a) {
-    futureVectorSumm=0
+    futureVectorSumm = 0;
     for (let i = 0; i < D; i++) {
-      futureVectorSumm+=a[i];
+      futureVectorSumm += a[i];
     }
     return futureVectorSumm;
   }
   // andVector(P[0],E)
   // summVector(E);
-  let newClaster=new Array();
-  for(let i=0;i<N;i++){
-    if(((summVector(andVector(P[i],E)))/(B+summVector(P[i])))>(summVector(E)/(B+parseFloat(D)))){
-      if((summVector(andVector(P[i],E)))/summVector(E)>=RHO){
-        P[i]=andVector(P[i],E);
+  let newClaster = new Array();
+  for (let i = 0; i < N; i++) {
+    if (
+      summVector(andVector(P[i], E)) / (B + summVector(P[i])) >
+      summVector(E) / (B + parseFloat(D))
+    ) {
+      if (summVector(andVector(P[i], E)) / summVector(E) >= RHO) {
+        P[i] = andVector(P[i], E);
 
         // console.log("yes");
       }
-    }else{
-      console.log("no")
+    } else {
+      console.log("no");
     }
   }
-  console.log(P)
+  // console.log(P)
   for (let i = 0; i < N; i++) {
-    document.querySelector("#newP").innerHTML += "<tr id=" + i+N + "></tr>";
+    document.querySelector("#newP").innerHTML += "<tr id=" + i + N + "></tr>";
 
     for (let j = 0; j < D; j++) {
       if (j == 0) {
-        document.getElementById(i+N).innerHTML += "<td>{ " + P[i][j] + "</td>";
+        document.getElementById(i + N).innerHTML +=
+          "<td>{ " + P[i][j] + "</td>";
       } else if (j == D - 1) {
-        document.getElementById(i+N).innerHTML += "<td>" + P[i][j] + " }</tr>";
+        document.getElementById(i + N).innerHTML +=
+          "<td>" + P[i][j] + " }</tr>";
       } else {
-        document.getElementById(i+N).innerHTML += "<td>" + P[i][j] + "</td>";
+        document.getElementById(i + N).innerHTML += "<td>" + P[i][j] + "</td>";
       }
     }
   }
+  /*---------------personalisation 2------------*/
+  let vectorSumuvania = new Array(),
+    l = 0,
+    resultSumm = 0,
+    resultMatrix = new Array(),
+    cnt = 0;
+  function max(obj) {
+    let a = obj[0];
+    for (let i = 1; i < obj.length; i++) {
+      if (obj[i] > a) {
+        a = obj[i];
+      }
+    }
+    return a;
+  }
+  function giveRecommend(a, b) {
+    cnt=0;resultMatrix=[];
+    for (let j = 0; j < D; j++) {
+      if (a[j] == 0) {
+        l = 0;
+        for (let i = 0; i < N; i++) {
+          if (i != b) {
+            vectorSumuvania[l] = P[i][j];
+            l++;
+          }
+        }
+        resultSumm = 0;
+        for (let i = 0; i < vectorSumuvania.length; i++) {
+          resultSumm += vectorSumuvania[i];
+          resultMatrix[cnt] = resultSumm;
+        }
+        cnt++;
+      }
+    }
+    return resultMatrix;
+  }
+
+  let index = 0;
+  for (let i = 0; i < N; i++) {
+    max(giveRecommend(P[i], i));
+    // for (let j = 0; j < D; j++) {
+
+    // }
+    console.log("recoment for ",i," ",resultMatrix);
+  }
+  // giveRecommend(P[index], index);
+  // console.log(resultMatrix);
+  // let recomentItem;
+
+  // for (let i = 0; i < resultMatrix.length; i++) {
+  //   console.log(max(resultMatrix));
+  // }
 }
 generateRandomArray();
