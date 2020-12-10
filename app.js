@@ -62,16 +62,13 @@ function generateRandomArray() {
       }
     }
   }
-  andVector();
-  
-  console.log(futureVector);
+  let futureVectorSumm=0;
+  function summVector() {
+    for (let i = 0; i < D; i++) {
+      futureVectorSumm+=E[i];
+    }
+  }
+  summVector()
+  console.log(futureVectorSumm);
 }
-/*-------------------------------------------------------------------*/
-
-// for (let i = 0; i < N; i++) {
-//     for (let j = 0; j < D; j++) {
-
-//     }
-// }
-
 generateRandomArray();
