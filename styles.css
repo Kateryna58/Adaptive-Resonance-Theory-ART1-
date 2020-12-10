@@ -35,7 +35,7 @@ body {
     margin: 0 auto;
 }
 
-#graph-container {
+#matrix-container {
     width: 70%;
     top: 5px;
     bottom: 0;
@@ -47,51 +47,31 @@ body {
     margin: 15px;
 }
 
-#graph-container div {
+#matrix-container div {
     z-index: 1;
 }
-
-svg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 5px;
-    bottom: 0;
-    left: 5px;
-    right: 15px;
-}
-
-line {
-    position: relative;
-}
-
-
 /*--------------------------------------*/
-
-.point {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: red;
-    border: 1px solid yellow;
+table,#E{
+    margin:15px 0px 0px 15px;
+    display:inline-block;
+    
 }
-
-.point {
-    font-size: 14px;
-    color: white;
-    font-style: bold;
-    text-align: center;
+#matrix-container h1{
+    color:black;
+    vertical-align:top;
 }
-/* The animation code */
-@keyframes example {
-    from {stroke: black;}
-    to {stroke: rgba(0, 0, 0, 0.068);}
-  }
-  
-  /* The element to apply the animation to */
-  .rebro line{
-    stroke: rgba(0, 0, 0, 0.068);
-    animation-name: example;
-    animation-duration: 3s;
-  }
+tr,#E{
+    font-size: 24px;
+    font-weight: bold;
+}
+tr > *,span{
+    padding:0px 10px;
+}
+span{
+    display: inline-block;
+    margin-top:10px;
+}
+#E{
+    display: inline-block;
+    vertical-align: top;
+}

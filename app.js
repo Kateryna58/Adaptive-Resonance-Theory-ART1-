@@ -1,7 +1,8 @@
 const RHO = 0.4;
 const BETA = 0.9;
-let y,
-  P = new Array();
+var y,
+  P = new Array(),
+  E = new Array();
 let D = document.querySelector("#D").value;
 let N = document.querySelector("#N").value;
 function generateRandomArray() {
@@ -16,5 +17,61 @@ function generateRandomArray() {
       }
     }
   }
-  console.log(P);
+  for (let i = 0; i < D; i++) {
+    y = Math.random();
+    if (y < 0.5) {
+      E[i] = Math.floor(y);
+    } else {
+      E[i] = Math.ceil(y);
+    }
+  }
+  for (let i = 0; i < N; i++) {
+    document.querySelector("#P").innerHTML += "<tr id=" + i + "></tr>";
+
+    for (let j = 0; j < D; j++) {
+      if (j == 0) {
+        document.getElementById(i).innerHTML += "<td>{ " + P[i][j] + "</td>";
+      } else if (j == D - 1) {
+        document.getElementById(i).innerHTML += "<td>" + P[i][j] + " }</tr>";
+      } else {
+        document.getElementById(i).innerHTML += "<td>" + P[i][j] + "</td>";
+      }
+    }
+  }
+  for (let j = 0; j < D; j++) {
+    if (j == 0) {
+      document.getElementById("E").innerHTML += "<span>{" + E[j] + " </span>";
+    } else if (j == D - 1) {
+      document.getElementById("E").innerHTML += "<span>" + E[j] + "} </span>";
+    } else {
+      document.getElementById("E").innerHTML += "<span>" + E[j] + "</span>";
+    }
+  }
+  let futureVector = new Array();
+  let x = new Array();
+  function andVector() {
+    for (let i = 0; i < 1; i++) {
+      x = P[i];
+      for (let j = 0; j < D; j++) {
+        // futureVector.push(x[j]+E[j]);
+        if(x[j]+E[j]>1){
+          futureVector.push(1);
+        }else{
+          futureVector.push(0);
+        }
+      }
+    }
+  }
+  andVector();
+  
+  console.log(futureVector);
 }
+/*-------------------------------------------------------------------*/
+
+// for (let i = 0; i < N; i++) {
+//     for (let j = 0; j < D; j++) {
+
+//     }
+// }
+
+generateRandomArray();
