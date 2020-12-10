@@ -1,5 +1,5 @@
 const RHO = 0.4;
-const BETA = 0.9;
+const B = 0.9;
 var y,
   P = new Array(),
   E = new Array();
@@ -48,27 +48,56 @@ function generateRandomArray() {
     }
   }
   let futureVector = new Array();
-  let x = new Array();
-  function andVector() {
-    for (let i = 0; i < 1; i++) {
-      x = P[i];
+  function andVector(a,b) {
+    // for (let i = 0; i < 1; i++) {
+    //   x = P[i];
+    futureVector=[];
       for (let j = 0; j < D; j++) {
         // futureVector.push(x[j]+E[j]);
-        if(x[j]+E[j]>1){
+        if(a[j]+b[j]>1){
           futureVector.push(1);
         }else{
           futureVector.push(0);
         }
+      // }
+    }
+    return futureVector;
+  }
+  let futureVectorSumm;
+  function summVector(a) {
+    futureVectorSumm=0
+    for (let i = 0; i < D; i++) {
+      futureVectorSumm+=a[i];
+    }
+    return futureVectorSumm;
+  }
+  // andVector(P[0],E)
+  // summVector(E);
+  let newClaster=new Array();
+  for(let i=0;i<N;i++){
+    if(((summVector(andVector(P[i],E)))/(B+summVector(P[i])))>(summVector(E)/(B+parseFloat(D)))){
+      if((summVector(andVector(P[i],E)))/summVector(E)>=RHO){
+        P[i]=andVector(P[i],E);
+
+        // console.log("yes");
+      }
+    }else{
+      console.log("no")
+    }
+  }
+  console.log(P)
+  for (let i = 0; i < N; i++) {
+    document.querySelector("#newP").innerHTML += "<tr id=" + i+N + "></tr>";
+
+    for (let j = 0; j < D; j++) {
+      if (j == 0) {
+        document.getElementById(i+N).innerHTML += "<td>{ " + P[i][j] + "</td>";
+      } else if (j == D - 1) {
+        document.getElementById(i+N).innerHTML += "<td>" + P[i][j] + " }</tr>";
+      } else {
+        document.getElementById(i+N).innerHTML += "<td>" + P[i][j] + "</td>";
       }
     }
   }
-  let futureVectorSumm=0;
-  function summVector() {
-    for (let i = 0; i < D; i++) {
-      futureVectorSumm+=E[i];
-    }
-  }
-  summVector()
-  console.log(futureVectorSumm);
 }
 generateRandomArray();
