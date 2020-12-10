@@ -93,13 +93,10 @@ function generateRandomArray() {
     document.querySelector("#newP").innerHTML += "<tr id=" + i + N + "></tr>";
 
     for (let j = 0; j < D; j++) {
-      if (j == 0) {
+      if (P[i][j] == 1) {
         document.getElementById(i + N).innerHTML +=
-          "<td>{ " + P[i][j] + "</td>";
-      } else if (j == D - 1) {
-        document.getElementById(i + N).innerHTML +=
-          "<td>" + P[i][j] + " }</tr>";
-      } else {
+          "<td style='background-color:red'>" + P[i][j] + "</td>";
+      }  else {
         document.getElementById(i + N).innerHTML += "<td>" + P[i][j] + "</td>";
       }
     }
@@ -153,10 +150,9 @@ function generateRandomArray() {
     }
     console.log("index", indices);
 
-      result[b] = new Array();
-      result[b] = a;
-      result[b][indices] = 1;
-    
+    result[b] = new Array();
+    result[b] = a;
+    result[b][indices] = 1;
     console.log("a:", a);
   }
 
@@ -165,21 +161,23 @@ function generateRandomArray() {
     giveRecommend(P[i], i);
   }
   console.log("RESULT", result);
-  // for (let i = 0; i < N; i++) {
-  //   max(giveRecommend(P[i], i));
+  let c;
+  for (let i = 0; i < N; i++) {
+    document.querySelector("#recomend").innerHTML +=
+      "<tr id=" + i + N + N + "></tr>";
+    for (let j = 0; j < D; j++) {
+      if ( result[i][j] == 1) {
+        document.getElementById(i + N + N).innerHTML +=
+          "<td style='background-color:red'> " + result[i][j] + "</td>";
+      } else {
+        document.getElementById(i + N + N).innerHTML +=
+          "<td>" + result[i][j] + " </td>";
 
-  //   console.log("recoment for ",i," ",resultMatrix);
-  //   console.log("recoment for ",i," ",max(resultMatrix));
-  //   for (let j = 0; j < resultMatrix.length; j++) {
-  //     if()
-  //   }
-  // }
-  // giveRecommend(P[index], index);
-  // console.log(resultMatrix);
-  // let recomentItem;
-
-  // for (let i = 0; i < resultMatrix.length; i++) {
-  //   console.log(max(resultMatrix));
+      } 
+    }
+  }
+  // if(document.getElementById(tr).childNodes.value==1){
+  //   document.getElementById(tr).childNodesstyle.cssText = 'background-color:red;'
   // }
 }
 generateRandomArray();
