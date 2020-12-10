@@ -3,9 +3,15 @@ const B = 0.9;
 var y,
   P = new Array(),
   E = new Array();
-let D = document.querySelector("#D").value;
-let N = document.querySelector("#N").value;
+let D;
+let N;
 function generateRandomArray() {
+  D = document.querySelector("#D").value;
+  N = document.querySelector("#N").value;
+  document.querySelector("#P").innerHTML ="";
+  document.querySelector("#E").innerHTML ="";
+  document.querySelector("#newP").innerHTML ="";
+  document.querySelector("#recomend").innerHTML ="";
   for (let i = 0; i < N; i++) {
     P[i] = new Array();
     for (let j = 0; j < D; j++) {
@@ -29,11 +35,9 @@ function generateRandomArray() {
     document.querySelector("#P").innerHTML += "<tr id=" + i + "></tr>";
 
     for (let j = 0; j < D; j++) {
-      if (j == 0) {
-        document.getElementById(i).innerHTML += "<td>{ " + P[i][j] + "</td>";
-      } else if (j == D - 1) {
-        document.getElementById(i).innerHTML += "<td>" + P[i][j] + " }</tr>";
-      } else {
+      if ( P[i][j] == 1) {
+        document.getElementById(i).innerHTML += "<td style='background-color:red;'>" + P[i][j] + "</td>";
+      }  else {
         document.getElementById(i).innerHTML += "<td>" + P[i][j] + "</td>";
       }
     }
