@@ -109,7 +109,10 @@ function generateRandomArray() {
     l = 0,
     resultSumm = 0,
     resultMatrix = new Array(),
-    cnt = 0;
+    cnt = 0,
+    result = new Array();
+  let indices = new Array();
+  let idx;
   function max(obj) {
     let a = obj[0];
     for (let i = 1; i < obj.length; i++) {
@@ -120,35 +123,57 @@ function generateRandomArray() {
     return a;
   }
   function giveRecommend(a, b) {
-    cnt=0;resultMatrix=[];
+    cnt = 0;
+    resultMatrix = [];
     for (let j = 0; j < D; j++) {
-      if (a[j] == 0) {
-        l = 0;
-        for (let i = 0; i < N; i++) {
-          if (i != b) {
-            vectorSumuvania[l] = P[i][j];
-            l++;
-          }
+      l = 0;
+      for (let i = 0; i < N; i++) {
+        if (i != b && a[j] == 0) {
+          vectorSumuvania[l] = P[i][j];
+          l++;
+        } else {
+          vectorSumuvania[l] = 0;
+          l++;
         }
-        resultSumm = 0;
-        for (let i = 0; i < vectorSumuvania.length; i++) {
-          resultSumm += vectorSumuvania[i];
-          resultMatrix[cnt] = resultSumm;
-        }
-        cnt++;
       }
+      resultSumm = 0;
+      for (let i = 0; i < vectorSumuvania.length; i++) {
+        resultSumm += vectorSumuvania[i];
+        resultMatrix[cnt] = resultSumm;
+      }
+      cnt++;
     }
-    return resultMatrix;
+    console.log("recomend for ", resultMatrix);
+    console.log("recomend for max ", max(resultMatrix));
+    indices = [];
+    idx = resultMatrix.indexOf(max(resultMatrix));
+    while (idx != -1) {
+      indices.push(idx);
+      idx = resultMatrix.indexOf(max(resultMatrix), idx + 1);
+    }
+    console.log("index", indices);
+
+      result[b] = new Array();
+      result[b] = a;
+      result[b][indices] = 1;
+    
+    console.log("a:", a);
   }
 
-  let index = 0;
+  let recomendation;
   for (let i = 0; i < N; i++) {
-    max(giveRecommend(P[i], i));
-    // for (let j = 0; j < D; j++) {
-
-    // }
-    console.log("recoment for ",i," ",resultMatrix);
+    giveRecommend(P[i], i);
   }
+  console.log("RESULT", result);
+  // for (let i = 0; i < N; i++) {
+  //   max(giveRecommend(P[i], i));
+
+  //   console.log("recoment for ",i," ",resultMatrix);
+  //   console.log("recoment for ",i," ",max(resultMatrix));
+  //   for (let j = 0; j < resultMatrix.length; j++) {
+  //     if()
+  //   }
+  // }
   // giveRecommend(P[index], index);
   // console.log(resultMatrix);
   // let recomentItem;
